@@ -11,7 +11,6 @@ EnemyCaller.prototype.update = function(_gameTime)
 		
 		if(_gameTime > this.ArrEnemys[i]["timeSpawn"] && !this.ObjEnemy[i].isCalled)
 		{
-			console.log("call this");
 			this.ObjEnemy[i].call();
 		}
 	}

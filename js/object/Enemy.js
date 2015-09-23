@@ -5,36 +5,66 @@ var Enemy = function(_index,game,enemyIndex){
 	this.game = game;
 	this.timer = new Phaser.Timer(game);
 	
-	if(enemyIndex["type"] == 1){
-		
+	if(enemyIndex["type"] == "1"){
+			
 		if(enemyIndex["pos"] == 1)
-			this.initialPositionY = game.height-30;
+			this.initialPositionY = game.height-40;
 		if(enemyIndex["pos"] == 2)
-			this.initialPositionY = game.height-75;
+			this.initialPositionY = game.height-85;
 		if(enemyIndex["pos"] == 3)
-			this.initialPositionY = game.height-120;
+			this.initialPositionY = game.height-130;
 
 		this.initialPositionX =game.width+50;
 		
+		this.score = 50;
 
 		this.walker = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemy');
-
+		
 		this.walker.width = 30;
 		this.walker.height = 30;
-		this.maxHealth = 2;
+		this.maxHealth = 4;
 		this.attackRange = 100;
+		this.speed = -50;
+
+		this.game.physics.enable(this.walker,Phaser.Physics.ARCADE);
 		
+	}else if(enemyIndex["type"] == "1b")
+	{
+		
+		this.initialPositionY = game.height-120;
+		this.isBos = true;
+		this.initialPositionX =game.width+100;
+
+		this.walker = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemy');
+		
+
+		this.bossAI = new BossAi(this.walker,game);
+
+		this.walker.width = 100;
+		this.walker.height = 100;
+		this.maxHealth = 50;
+
+		this.attackRange = 100;
+		this.speed = -20;
+		
+		this.score = 300;
+
+		this.game.physics.enable(this.walker,Phaser.Physics.ARCADE);
 	}else {
 		
 		this.initialPositionX =game.width+50;
 		this.initialPositionY = 100;
 		
 		this.walker = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemy');
+		
 
 		this.walker.width = 30;
 		this.walker.height = 30;
 		this.maxHealth = 5;
 		this.attackRange = 300;
+		this.speed = -50;
+		this.score = 80;
+		this.game.physics.enable(this.walker,Phaser.Physics.ARCADE);
 	}
 	
 	this.walker.index = _index;
@@ -48,9 +78,9 @@ var Enemy = function(_index,game,enemyIndex){
 	this.walker.hud.x = this.initialPositionX;
 	this.walker.hud.alpha = 0;
 	this.walker.hud.appearTime = 3;
-
-	this.speed = -100;
-	this.game.physics.enable(this.walker,Phaser.Physics.ARCADE);
+	this.initScore = this.score;
+	
+	
 
 	
 	this.currentHealth = this.maxHealth;
@@ -77,7 +107,8 @@ var Enemy = function(_index,game,enemyIndex){
 
 Enemy.prototype.update = function(){
 	this.currentTik += this.game.time.physicsElapsed;
-
+	this.score -= this.game.time.physicsElapsed * this.initScore/100;
+	
 	if(this.state == "attack")
 	{
 		this.currentAttackTimer += this.game.time.physicsElapsed;
@@ -97,14 +128,13 @@ Enemy.prototype.update = function(){
 		this.currentTik = 0;
 		this.walker.hud.alpha = 0;
 	}
-
 	
 	
+		this.walker.hud.x = this.walker.x;
+		this.walker.hud.y = this.walker.y-10;
+	
 
-	this.walker.hud.x = this.walker.x;
-	this.walker.hud.y = this.walker.y-10;
-
-	//Simple AI
+	
 
 	//enemy nyampe benteng
 	if(this.walker.x < this.attackRange)
@@ -112,9 +142,16 @@ Enemy.prototype.update = function(){
 		this.state = "attack";
 		this.walker.body.velocity.x = 0;
 	}else{
+		if(this.isBos){
+			
+			this.bossAI.update();
+		}else{
 		//enemy baru nongol
-		this.walker.body.velocity.x = this.speed;
+			this.walker.body.velocity.x = this.speed;
+		}
 	}
+
+
 }
 
 Enemy.prototype.call= function(){
