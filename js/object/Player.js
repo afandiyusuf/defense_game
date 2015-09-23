@@ -38,7 +38,7 @@ Player.prototype.takeDamage = function(_damage){
 	if(this.currentHealth <= 0)
 	{
 		console.log("health 0");
-		game.state.start('mainMenuState');
+		game.state.start('resultState');
 		
 	}
 }

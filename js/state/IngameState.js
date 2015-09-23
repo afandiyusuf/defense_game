@@ -29,7 +29,7 @@ var ingameState = {
 			lvlManager.enemyCalls++;
 		}
 
-		
+		playerScore = 0;
 		
 
 		bullets = game.add.group();
@@ -42,19 +42,38 @@ var ingameState = {
 		bullets.setAll('width',10);
 		bullets.setAll('height',10);
 		
+		this.introText = game.add.text(game.width/2, 10, "LEVEL "+lvlNow);
+
 
 
 		player = new Player(game,bullets);
 		hud = new Hud(game,player);
 		enemyManager = new EnemyCaller(game,lvlManager.arrEnemy[lvlNow],enemys);
 		
+		this.longIntro = 3;
+		this.longEndGame = 3;
+		this.eventTimer = 0;
 
+		this.isStart  = false;
+		this.isGameEnd = false;
 	},
 
 	update : function () {
 
+		if(!this.isStart && this.eventTimer < this.longIntro){
+			this.eventTimer += game.time.physicsElapsed;
+			return;
+		}
+
+		else{
+			if(!this.isStart){
+				game.world.remove(this.introText);
+				this.isStart = true;
+			}
+		}
 		gameTime += game.time.physicsElapsed;
 		
+
 		player.update();
 		hud.update();
 		enemyManager.update(gameTime);
@@ -83,13 +102,16 @@ function bulletHitEnemy (walker, bullet) {
 
 		if(destroyed)
 		{
+
 			lvlManager.enemyCalls--;
+			playerScore += Math.floor(enemys[walker.index].score);
 			
-			//game win
+
 			if(lvlManager.enemyCalls <=0)
 			{
+				this.isGameEnd = true;
 				console.log("game win");
-				game.state.start('mainMenuState',true,false);
+				game.state.start('resultState',true,false);
 			}
 		}
 	
