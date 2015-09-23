@@ -1,8 +1,5 @@
 var mainMenuState = {
 	preload : function () {
-		
-		
-
 		game.load.spritesheet('button', 'assets/button/button_sprite_sheet.png', 193, 71);
     
 	},
@@ -21,7 +18,7 @@ var mainMenuState = {
 	},
 
 	update : function(){
-	
+		
 	}
 }
 
