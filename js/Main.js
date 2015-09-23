@@ -13,8 +13,9 @@ var lvlManager;
 var lvlNow = 0;
 var enemyManager;
 var gameTime = 0;
-
+var playerScore = 0;
 
 game.state.add('ingameState',ingameState);
 game.state.add('mainMenuState',mainMenuState);
+game.state.add('resultState',resultState);
 game.state.start('mainMenuState',true,false);
