@@ -1,13 +1,46 @@
+var map;
 var ingameState = {
 	preload : function () {
 
 		game.load.image('player', 'assets/sprites/white.png');
-		game.load.image('bullet', 'assets/sprites/black.png');
+		game.load.image('background', 'assets/sprites/background.jpg');
+		game.load.image('bullet', 'assets/sprites/Black Arrow S.png');
+		game.load.image('bullet_hit', 'assets/sprites/Black Mancep.png');
 		game.load.image('enemy', 'assets/sprites/merah muda.png');
 		game.load.image('hud', 'assets/sprites/white.png');
+		game.load.image('scoreHud','assets/sprites/Score.png');
+
+		game.load.image('bg_healthBar','assets/sprites/Health Bar.png');
+		game.load.image('fill_healthBar','assets/sprites/Darah isi.png');
+
+		game.load.image('bg_manaBar','assets/sprites/Mana Bar.png');
+		game.load.image('fill_manaBar','assets/sprites/Mana isi.png');
+
+		game.load.image('Avatar','assets/sprites/Bunder.png');
+
+
+		
+
+   		
+
+   		 game.load.atlasJSONHash('attackAnim', 'assets/sprites/AttackAnim.png', 'assets/sprites/AttackAnim.json');
+
 	},
 
 	create : function () {
+
+		game.plugins.screenShake = game.plugins.add(Phaser.Plugin.ScreenShake);
+		
+		game.add.sprite(0, 0, 'background');
+		
+
+		game.plugins.screenShake.setup({
+		 shakeX: true,
+		 shakeY: true,
+		 sensCoef : 0.01
+		});
+
+
 		this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE
 		this.scale.pageAlignHorizontally = true;
 		this.scale.pageAlignVertically = true;
@@ -31,22 +64,29 @@ var ingameState = {
 
 		playerScore = 0;
 		
+		this.bulletsHit = game.add.group();
+		this.bulletsHit.enableBody = false;
+
+		this.bulletsHit.createMultiple(200, 'bullet_hit');
+		this.bulletsHit.setAll('width',47);
+		this.bulletsHit.setAll('height',7);
 
 		bullets = game.add.group();
 		bullets.enableBody = true;
 		bullets.physicsBodyType = Phaser.Physics.ARCADE;
 		bullets.createMultiple(50, 'bullet');
+		
+		
 
 		bullets.setAll('checkWorldBounds', true);
 		bullets.setAll('outOfBoundsKill', true);
-		bullets.setAll('width',10);
-		bullets.setAll('height',10);
 		
-		this.introText = game.add.text(game.width/2, 10, "LEVEL "+lvlNow);
+		
+	
 
 
 
-		player = new Player(game,bullets);
+		player = new Player(game,bullets,this.bulletsHit);
 		hud = new Hud(game,player);
 		enemyManager = new EnemyCaller(game,lvlManager.arrEnemy[lvlNow],enemys);
 		
@@ -67,7 +107,7 @@ var ingameState = {
 
 		else{
 			if(!this.isStart){
-				game.world.remove(this.introText);
+				hud.removeIntro();
 				this.isStart = true;
 			}
 		}
@@ -92,6 +132,9 @@ var ingameState = {
 
 
 function bulletHitEnemy (walker, bullet) {
+
+		if(bullet.state == "dead")
+			return;
 
 		bullet.kill();
 

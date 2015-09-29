@@ -4,13 +4,13 @@ var Enemy = function(_index,game,enemyIndex){
 	this.state = "moving";
 	this.game = game;
 	this.timer = new Phaser.Timer(game);
-	
+	this.attackRange = 250;
 	if(enemyIndex["type"] == "1"){
 			
 		if(enemyIndex["pos"] == 1)
-			this.initialPositionY = game.height-40;
+			this.initialPositionY = game.height-210;
 		if(enemyIndex["pos"] == 2)
-			this.initialPositionY = game.height-85;
+			this.initialPositionY = game.height-170;
 		if(enemyIndex["pos"] == 3)
 			this.initialPositionY = game.height-130;
 
@@ -23,7 +23,7 @@ var Enemy = function(_index,game,enemyIndex){
 		this.walker.width = 30;
 		this.walker.height = 30;
 		this.maxHealth = 4;
-		this.attackRange = 100;
+	
 		this.speed = -50;
 
 		this.game.physics.enable(this.walker,Phaser.Physics.ARCADE);
@@ -61,7 +61,7 @@ var Enemy = function(_index,game,enemyIndex){
 		this.walker.width = 30;
 		this.walker.height = 30;
 		this.maxHealth = 5;
-		this.attackRange = 300;
+		
 		this.speed = -50;
 		this.score = 80;
 		this.game.physics.enable(this.walker,Phaser.Physics.ARCADE);
@@ -102,10 +102,14 @@ var Enemy = function(_index,game,enemyIndex){
 
 	this.damage = 10;
 	
-	this.textstyle = { font: "12px Arial", fill: "#ff0044", wordWrap: true,align: "center" };
+	this.textstyle = { font: "20px Arial", fill: "white", wordWrap: true,align: "center" };
 }
 
 Enemy.prototype.update = function(){
+	
+	if(this.state == "dead")
+		return;
+	game.world.bringToTop(this.walker);
 	this.currentTik += this.game.time.physicsElapsed;
 	this.score -= this.game.time.physicsElapsed * this.initScore/100;
 	
@@ -132,9 +136,6 @@ Enemy.prototype.update = function(){
 	
 		this.walker.hud.x = this.walker.x;
 		this.walker.hud.y = this.walker.y-10;
-	
-
-	
 
 	//enemy nyampe benteng
 	if(this.walker.x < this.attackRange)
@@ -165,7 +166,7 @@ Enemy.prototype.call= function(){
 }
 
 Enemy.prototype.takeDamage = function(){
-
+	
 	this.currentHealth--;
 	this.walker.hud.alpha = 1;
 	this.game.add.tween(this.walker.hud).to( { width: (this.currentHealth/this.maxHealth)*this.walker.hud.initWidth }, 100, Phaser.Easing.linear, true);
@@ -176,14 +177,18 @@ Enemy.prototype.takeDamage = function(){
 		this.alive = false;
 		this.walker.hud.kill();
 		this.walker.kill();
+		game.plugins.screenShake.shake(10);
+		this.state = "dead";
 		return true;
 	}
 
+	game.plugins.screenShake.shake(2);
 	return false;
 }
 
 Enemy.prototype.showDamage = function(damage,parent){
-	this.textDamage = game.add.text(parent.x, parent.y+parent.height/2, damage, this.textstyle);
+	this.textDamage = game.add.text(parent.x, parent.y - 20, damage, this.textstyle);
+	this.textDamage.strokeThickness = 2;
 	this.game.add.tween(this.textDamage).to( { y: this.textDamage.y-100,alpha:0}, 1000, Phaser.Easing.linear, true);
 }
 
