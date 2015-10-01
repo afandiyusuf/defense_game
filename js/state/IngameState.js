@@ -2,7 +2,8 @@ var map;
 var ingameState = {
 	preload : function () {
 
-		game.load.image('player', 'assets/sprites/white.png');
+		//game.load.image('player', 'assets/sprites/white.png');
+		game.load.image('player', 'assets/sprites/Char badan.png');
 		game.load.image('background', 'assets/sprites/background.jpg');
 		game.load.image('bullet', 'assets/sprites/Black Arrow S.png');
 		game.load.image('bullet_hit', 'assets/sprites/Black Mancep.png');
@@ -10,6 +11,8 @@ var ingameState = {
 		game.load.image('hud', 'assets/sprites/white.png');
 		game.load.image('scoreHud','assets/sprites/Score.png');
 
+
+		game.load.image('head', 'assets/sprites/Head.png');
 		game.load.image('bg_healthBar','assets/sprites/Health Bar.png');
 		game.load.image('fill_healthBar','assets/sprites/Darah isi.png');
 
@@ -18,12 +21,7 @@ var ingameState = {
 
 		game.load.image('Avatar','assets/sprites/Bunder.png');
 
-
-		
-
-   		
-
-   		 game.load.atlasJSONHash('attackAnim', 'assets/sprites/AttackAnim.png', 'assets/sprites/AttackAnim.json');
+   		 game.load.atlasJSONHash('playerAnim', 'assets/animation/PlayerAnimation.png', 'assets/animation/playerAnimation.json');
 
 	},
 
@@ -81,11 +79,6 @@ var ingameState = {
 		bullets.setAll('checkWorldBounds', true);
 		bullets.setAll('outOfBoundsKill', true);
 		
-		
-	
-
-
-
 		player = new Player(game,bullets,this.bulletsHit);
 		hud = new Hud(game,player);
 		enemyManager = new EnemyCaller(game,lvlManager.arrEnemy[lvlNow],enemys);
@@ -154,7 +147,8 @@ function bulletHitEnemy (walker, bullet) {
 			{
 				this.isGameEnd = true;
 				console.log("game win");
-				game.state.start('resultState',true,false);
+				transitionPlugin.to("resultState");
+				//game.state.start('resultState',true,false);
 			}
 		}
 	
