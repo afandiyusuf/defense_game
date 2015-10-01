@@ -2,11 +2,13 @@ var Player = function(game,bullets,bulletsHit){
 	this.game = game;
 	this.bullets = bullets;
 	this.hitBullet = bulletsHit;
-	this.base = game.add.sprite(120, 180, 'attackAnim');
+	this.baseSprite = game.add.sprite(60, 110, 'player');
+
+	this.base = game.add.sprite(83, 153, 'playerAnim');
 
 	
-	this.base.width = 80;
-	this.base.height = 80;
+	//this.base.width = 120;
+	//this.base.height = 80;
 	this.base.anchor.set(0.5);
 	this.game.physics.enable(this.base, Phaser.Physics.ARCADE);
 	this.base.body.allowRotation = false;
@@ -18,12 +20,12 @@ var Player = function(game,bullets,bulletsHit){
 
 
 	this.base.animations.add('attack', [
-        'Attack 1.png',
-        'Attack 2.png',
-        'Attack 3.png',
-        'Attack 4.png',
-        'Attack 5.png',
-        'Attack 6.png',
+        'tanggan (1).png',
+        'tanggan (2).png',
+        'tanggan (3).png',
+        'tanggan (4).png',
+        'tanggan (5).png',
+        'tanggan (6).png',
     ], 2, true, false);
 
     this.base.animations.play('attack',10,true);
@@ -101,7 +103,8 @@ Player.prototype.takeDamage = function(_damage){
 
 	if(this.currentHealth <= 0)
 	{
-		game.state.start('resultState');
+		transitionPlugin.to("resultState");
+		//game.state.start('resultState');
 		
 	}
 }

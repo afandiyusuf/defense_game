@@ -11,6 +11,8 @@ var Hud = function(game,player){
 	scoreHud.x = game.width - (scoreHud.width+this.margin) -10;
 	scoreHud.y = this.margin + 10;
 
+	
+
 	this.scoreText = game.add.text(10, 60, playerScore);
 	this.scoreText.x = game.width - 110;
 	this.scoreText.y = 28;
@@ -44,6 +46,10 @@ var Hud = function(game,player){
 	this.baseWidthHealth = this.fillHealth.width;
 	this.expethWidthHealth = 0;
 	this.introText = game.add.text(game.width/2, 10, "LEVEL "+lvlNow);
+
+	this.head = game.add.sprite(20,2,'head');
+	this.head.width = 50;
+	this.head.height = 67;
 }
 
 Hud.prototype.update = function(){
