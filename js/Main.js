@@ -16,6 +16,7 @@ var enemyManager;
 var gameTime = 0;
 var playerScore = 0;
 
+var transitionPlugin;
 
 game.state.add('ingameState',ingameState);
 game.state.add('mainMenuState',mainMenuState);
