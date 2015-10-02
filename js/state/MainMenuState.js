@@ -31,8 +31,8 @@ var mainMenuState = {
 
 		game.add.sprite(0, 0, 'background');
 		
-		//this.scale.pageAlignHorizontally = true;
-		//this.scale.pageAlignVertically = true;
+		this.scale.pageAlignHorizontally = true;
+		this.scale.pageAlignVertically = true;
 
 		button = game.add.button(game.world.centerX - 95, 400, 'button', actionOnClick2, this, 2, 1, 0);
 

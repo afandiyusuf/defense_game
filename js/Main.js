@@ -1,6 +1,6 @@
 var IDE_HOOK = false;
         
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example');
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example');
 
 var player;
 var bullets;

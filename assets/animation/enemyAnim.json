@@ -1,0 +1,102 @@
+{"frames": {
+
+"monster_walk (1).png":
+{
+	"frame": {"x":505,"y":2,"w":90,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":8,"w":90,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (10).png":
+{
+	"frame": {"x":410,"y":2,"w":93,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":13,"y":8,"w":93,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (2).png":
+{
+	"frame": {"x":410,"y":2,"w":93,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":13,"y":8,"w":93,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (3).png":
+{
+	"frame": {"x":312,"y":2,"w":96,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":8,"w":96,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (4).png":
+{
+	"frame": {"x":212,"y":2,"w":98,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":8,"w":98,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (5).png":
+{
+	"frame": {"x":109,"y":2,"w":101,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":8,"w":101,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (6).png":
+{
+	"frame": {"x":2,"y":2,"w":105,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":8,"w":105,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (7).png":
+{
+	"frame": {"x":109,"y":2,"w":101,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":8,"w":101,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (8).png":
+{
+	"frame": {"x":212,"y":2,"w":98,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":8,"w":98,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"monster_walk (9).png":
+{
+	"frame": {"x":312,"y":2,"w":96,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":8,"w":96,"h":88},
+	"sourceSize": {"w":111,"h":105},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "EnemyAnim.png",
+	"format": "RGBA8888",
+	"size": {"w":605,"h":92},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:dc880479b84c0a4ba2402194f669889b:fa685c8fcb69128f5620f5f1302ee1e6:6a704f4149abee35e4f875623b80bbbc$"
+}
+}

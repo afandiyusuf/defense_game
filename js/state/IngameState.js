@@ -5,7 +5,7 @@ var ingameState = {
 		//game.load.image('player', 'assets/sprites/white.png');
 		game.load.image('player', 'assets/sprites/Char badan.png');
 		game.load.image('background', 'assets/sprites/background.jpg');
-		game.load.image('bullet', 'assets/sprites/Black Arrow S.png');
+		game.load.image('bullet', 'assets/sprites/Soul Arrow S.png');
 		game.load.image('bullet_hit', 'assets/sprites/Black Mancep.png');
 		game.load.image('enemy', 'assets/sprites/merah muda.png');
 		game.load.image('hud', 'assets/sprites/white.png');
@@ -22,7 +22,12 @@ var ingameState = {
 		game.load.image('Avatar','assets/sprites/Bunder.png');
 
 		game.load.bitmapFont('fonts', 'font/font.png', 'font/font.xml');
-   		 game.load.atlasJSONHash('playerAnim', 'assets/animation/PlayerAnimation.png', 'assets/animation/playerAnimation.json');
+
+		game.load.image('enemyShadow','assets/sprites/Bayang.png');
+
+   		game.load.atlasJSONHash('playerAnim', 'assets/animation/PlayerAnimation.png', 'assets/animation/playerAnimation.json');
+
+   		game.load.atlasJSONHash('enemyAnim', 'assets/animation/enemyAnim.png', 'assets/animation/enemyAnim.json');
 
 	},
 
@@ -77,6 +82,7 @@ var ingameState = {
 
 		bullets.setAll('checkWorldBounds', true);
 		bullets.setAll('outOfBoundsKill', true);
+
 		
 		player = new Player(game,bullets,this.bulletsHit);
 		hud = new Hud(game,player);

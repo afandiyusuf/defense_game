@@ -104,7 +104,6 @@ Player.prototype.takeDamage = function(_damage){
 	if(this.currentHealth <= 0)
 	{
 		transitionPlugin.to("resultState");
-		//game.state.start('resultState');
 		
 	}
 }

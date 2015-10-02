@@ -63,6 +63,7 @@ Hud.prototype.update = function(){
 		this.fillHealth.width -= 5;
 	} 
 	this.scoreText.text = playerScore;
+	
 }
 
 Hud.prototype.removeIntro = function(){

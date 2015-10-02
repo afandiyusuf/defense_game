@@ -5,28 +5,40 @@ var Enemy = function(_index,game,enemyIndex){
 	this.game = game;
 	this.timer = new Phaser.Timer(game);
 	this.attackRange = 250;
+
 	if(enemyIndex["type"] == "1"){
 			
 		if(enemyIndex["pos"] == 1)
-			this.initialPositionY = game.height-210;
+			this.initialPositionY = game.height-260;
 		if(enemyIndex["pos"] == 2)
-			this.initialPositionY = game.height-170;
+			this.initialPositionY = game.height-220;
 		if(enemyIndex["pos"] == 3)
-			this.initialPositionY = game.height-130;
+			this.initialPositionY = game.height-180;
 
 		this.initialPositionX =game.width+50;
 		
 		this.score = 50;
+		this.shadow = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemyShadow');
+		this.walker = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemyAnim');
+		this.walker.animations.add('walk', [
+        'monster_walk (1).png',
+        'monster_walk (2).png',
+        'monster_walk (3).png',
+        'monster_walk (4).png',
+        'monster_walk (5).png',
+        'monster_walk (6).png',
+        'monster_walk (7).png',
+        'monster_walk (8).png',
+        'monster_walk (9).png',
+        'monster_walk (10).png'
+    ], 2, true, false);
 
-		this.walker = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemy');
-		
-		this.walker.width = 30;
-		this.walker.height = 30;
 		this.maxHealth = 4;
 	
 		this.speed = -50;
 
 		this.game.physics.enable(this.walker,Phaser.Physics.ARCADE);
+		
 		
 	}else if(enemyIndex["type"] == "1b")
 	{
@@ -36,7 +48,7 @@ var Enemy = function(_index,game,enemyIndex){
 		this.initialPositionX =game.width+100;
 
 		this.walker = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemy');
-		
+		this.shadow = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemyShadow');
 
 		this.bossAI = new BossAi(this.walker,game);
 
@@ -56,7 +68,7 @@ var Enemy = function(_index,game,enemyIndex){
 		this.initialPositionY = 100;
 		
 		this.walker = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemy');
-		
+		this.shadow = this.game.add.sprite(this.initialPositionX,this.initialPositionY,'enemyShadow');
 
 		this.walker.width = 30;
 		this.walker.height = 30;
@@ -152,6 +164,9 @@ Enemy.prototype.update = function(){
 		}
 	}
 
+	this.shadow.x = this.walker.x-10;
+	this.shadow.y = this.walker.y+this.walker.height-30;
+
 
 }
 
@@ -163,6 +178,8 @@ Enemy.prototype.call= function(){
 	this.walker.body.velocity.x = this.speed;
 	this.alive = true;
 	this.isCalled = true;
+
+	this.walker.play('walk',10,true);
 }
 
 Enemy.prototype.takeDamage = function(){
@@ -172,24 +189,30 @@ Enemy.prototype.takeDamage = function(){
 	this.game.add.tween(this.walker.hud).to( { width: (this.currentHealth/this.maxHealth)*this.walker.hud.initWidth }, 100, Phaser.Easing.linear, true);
 	this.currentTik = 0;
 	this.showDamage(11,this.walker);
+
 	if(this.currentHealth == 0)
 	{
 		this.alive = false;
 		this.walker.hud.kill();
 		this.walker.kill();
 		game.plugins.screenShake.shake(10);
+		this.shadow.kill();
 		this.state = "dead";
 		return true;
 	}
 
 	game.plugins.screenShake.shake(2);
+
+	//game.world.bringToTop(this.walker.hud);
 	return false;
 }
 
 Enemy.prototype.showDamage = function(damage,parent){
+
 	this.textDamage = game.add.text(parent.x, parent.y - 20, damage, this.textstyle);
 	this.textDamage.strokeThickness = 2;
 	this.game.add.tween(this.textDamage).to( { y: this.textDamage.y-100,alpha:0}, 1000, Phaser.Easing.linear, true);
+
 }
 
 
