@@ -2,14 +2,16 @@ var Player = function(game,bullets,bulletsHit){
 	this.game = game;
 	this.bullets = bullets;
 	this.hitBullet = bulletsHit;
+	this.baseRight = game.add.sprite(100, 155, 'playerAnim');
+	this.baseRight.anchor.setTo(0.2, 0.5);
 	this.baseSprite = game.add.sprite(60, 110, 'player');
 
-	this.base = game.add.sprite(83, 153, 'playerAnim');
-
+	this.base = game.add.sprite(80, 163, 'playerAnim');
+	this.base.anchor.setTo(0.3, 0.5);
 	
 	//this.base.width = 120;
 	//this.base.height = 80;
-	this.base.anchor.set(0.5);
+	//this.base.anchor.set(0.5);
 	this.game.physics.enable(this.base, Phaser.Physics.ARCADE);
 	this.base.body.allowRotation = false;
 	this.currentHealth = 100;
@@ -20,21 +22,31 @@ var Player = function(game,bullets,bulletsHit){
 
 
 	this.base.animations.add('attack', [
-        'tanggan (1).png',
-        'tanggan (2).png',
-        'tanggan (3).png',
-        'tanggan (4).png',
-        'tanggan (5).png',
-        'tanggan (6).png',
+        'kanan (1).png',
+        'kanan (2).png',
+        'kanan (3).png',
+        'kanan (4).png',
+        'kanan (5).png',
+        'kanan (6).png',
     ], 2, true, false);
 
-    this.base.animations.play('attack',10,true);
+    this.baseRight.animations.add('attack',[
+    	'kiri (1).png',
+        'kiri (2).png',
+        'kiri (3).png',
+        'kiri (4).png',
+        'kiri (5).png',
+        'kiri (6).png',
+    	],2,true,false);
 
+    this.base.animations.play('attack',10,true);
+    this.baseRight.animations.play('attack',10,true);
 
 }
 
 Player.prototype.update = function(){
 	this.base.rotation = this.game.physics.arcade.angleToPointer(this.base);
+	this.baseRight.rotation = this.game.physics.arcade.angleToPointer(this.baseRight);
 	this.fire();
 	
 

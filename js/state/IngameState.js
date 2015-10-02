@@ -25,7 +25,7 @@ var ingameState = {
 
 		game.load.image('enemyShadow','assets/sprites/Bayang.png');
 
-   		game.load.atlasJSONHash('playerAnim', 'assets/animation/PlayerAnimation.png', 'assets/animation/playerAnimation.json');
+   		game.load.atlasJSONHash('playerAnim', 'assets/animation/playerAnim.png', 'assets/animation/playerAnim.json');
 
    		game.load.atlasJSONHash('enemyAnim', 'assets/animation/enemyAnim.png', 'assets/animation/enemyAnim.json');
 
