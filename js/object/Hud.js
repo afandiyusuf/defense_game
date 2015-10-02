@@ -45,7 +45,9 @@ var Hud = function(game,player){
 
 	this.baseWidthHealth = this.fillHealth.width;
 	this.expethWidthHealth = 0;
-	this.introText = game.add.text(game.width/2, 10, "LEVEL "+lvlNow);
+
+	this.introText = game.add.bitmapText(200, 100,"fonts", "LEVEL 1",64);
+
 
 	this.head = game.add.sprite(20,2,'head');
 	this.head.width = 50;
