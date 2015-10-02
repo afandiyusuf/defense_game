@@ -21,6 +21,7 @@ var ingameState = {
 
 		game.load.image('Avatar','assets/sprites/Bunder.png');
 
+		game.load.bitmapFont('fonts', 'font/font.png', 'font/font.xml');
    		 game.load.atlasJSONHash('playerAnim', 'assets/animation/PlayerAnimation.png', 'assets/animation/playerAnimation.json');
 
 	},
@@ -73,8 +74,6 @@ var ingameState = {
 		bullets.enableBody = true;
 		bullets.physicsBodyType = Phaser.Physics.ARCADE;
 		bullets.createMultiple(50, 'bullet');
-		
-		
 
 		bullets.setAll('checkWorldBounds', true);
 		bullets.setAll('outOfBoundsKill', true);
@@ -89,6 +88,25 @@ var ingameState = {
 
 		this.isStart  = false;
 		this.isGameEnd = false;
+
+
+
+		var fullscreenIcon = game.add.image(game.width, game.height, "phone");
+		fullscreenIcon.x = game.width- fullscreenIcon.width;
+		fullscreenIcon.y = game.height- fullscreenIcon.height;
+		
+		fullscreenIcon.scale.set(0.9,0.9);
+
+		fullscreenIcon.inputEnabled = true;
+		fullscreenIcon.events.onInputDown.add(function() {
+			if (game.scale.isFullScreen) {
+				game.scale.stopFullScreen();
+			}
+			else {
+				game.scale.startFullScreen(false);
+			}
+		}, this);
+
 	},
 
 	update : function () {
