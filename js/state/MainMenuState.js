@@ -7,8 +7,8 @@ var mainMenuState = {
 	},
 	create :function(){
 
+		
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-		game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
 
 		
 
@@ -30,9 +30,9 @@ var mainMenuState = {
 		});
 
 		game.add.sprite(0, 0, 'background');
-		this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
-		this.scale.pageAlignHorizontally = true;
-		this.scale.pageAlignVertically = true;
+		
+		//this.scale.pageAlignHorizontally = true;
+		//this.scale.pageAlignVertically = true;
 
 		button = game.add.button(game.world.centerX - 95, 400, 'button', actionOnClick2, this, 2, 1, 0);
 
@@ -48,9 +48,8 @@ var mainMenuState = {
 		text.anchor.set(0.5);
 
 
-		var fullscreenIcon = game.add.image(game.width, game.height, "phone");
-		fullscreenIcon.x = game.width- fullscreenIcon.width;
-		fullscreenIcon.y = game.height- fullscreenIcon.height;
+		var fullscreenIcon = game.add.image(0, 0, "phone");
+		
 	
 		fullscreenIcon.scale.set(0.9,0.9);
 

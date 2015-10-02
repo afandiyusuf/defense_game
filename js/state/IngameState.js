@@ -40,7 +40,7 @@ var ingameState = {
 		});
 
 
-		this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE
+
 		this.scale.pageAlignHorizontally = true;
 		this.scale.pageAlignVertically = true;
 
@@ -91,21 +91,7 @@ var ingameState = {
 
 
 
-		var fullscreenIcon = game.add.image(game.width, game.height, "phone");
-		fullscreenIcon.x = game.width- fullscreenIcon.width;
-		fullscreenIcon.y = game.height- fullscreenIcon.height;
-		
-		fullscreenIcon.scale.set(0.9,0.9);
-
-		fullscreenIcon.inputEnabled = true;
-		fullscreenIcon.events.onInputDown.add(function() {
-			if (game.scale.isFullScreen) {
-				game.scale.stopFullScreen();
-			}
-			else {
-				game.scale.startFullScreen(false);
-			}
-		}, this);
+	
 
 	},
 
