@@ -28,7 +28,10 @@ var Player = function(game,bullets,bulletsHit){
         'kanan (4).png',
         'kanan (5).png',
         'kanan (6).png',
-    ], 2, true, false);
+        
+        'kanan (2).png',
+        
+    ], 20, true, false);
 
     this.baseRight.animations.add('attack',[
     	'kiri (1).png',
@@ -37,10 +40,14 @@ var Player = function(game,bullets,bulletsHit){
         'kiri (4).png',
         'kiri (5).png',
         'kiri (6).png',
-    	],2,true,false);
+        
+        'kiri (2).png',
+        
+        
+    	],50,true,false);
 
-    this.base.animations.play('attack',10,true);
-    this.baseRight.animations.play('attack',10,true);
+    this.base.animations.play('attack',20,true);
+    this.baseRight.animations.play('attack',20,true);
 
 }
 
@@ -92,13 +99,16 @@ Player.prototype.fire = function() {
         this.nextFire = game.time.now + this.fireRate;
 
         var bullet = this.bullets.getFirstDead();
-
-        if(game.input.mousePointer.y < minBaseFloor)
-        {
-        	bullet.maxY = minBaseFloor;	
-        }else{
-        	bullet.maxY = game.input.mousePointer.y;
-        }
+        if(!isMobile){
+        	if(game.input.mousePointer.y < minBaseFloor)
+        	{
+        		bullet.maxY = minBaseFloor;	
+        	}else{
+        		bullet.maxY = game.input.mousePointer.y;
+        	}
+    	}else{
+    		bullet.maxY = 500;
+    	}
 
         bullet.state = "meluncur";
         bullet.reset(this.base.x, this.base.y);

@@ -27,7 +27,7 @@ var ingameState = {
 
    		game.load.atlasJSONHash('playerAnim', 'assets/animation/playerAnim.png', 'assets/animation/playerAnim.json');
 
-   		game.load.atlasJSONHash('enemyAnim', 'assets/animation/enemyAnim.png', 'assets/animation/enemyAnim.json');
+   		game.load.atlasJSONHash('enemyAnim', 'assets/animation/EnemyAnim.png', 'assets/animation/enemyAnim.json');
 
 	},
 
